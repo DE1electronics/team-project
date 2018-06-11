@@ -3,9 +3,10 @@ from pyb import Pin, Timer, ADC
 
 class Motor:
 	def __init__(self, out1, out2, pwm, chan):
-		self.o1 = (out1, Pin.OUT_PP)
-		self.o2 = (out2, Pin.OUT_PP)
-		self.ch = tim.channel(chan, Timer.PWM, pin = pwm)
+		self.o1 = Pin(out1, Pin.OUT_PP)
+		self.o2 = Pin(out2, Pin.OUT_PP)
+		self.pwm = Pin(pwm)
+		self.ch = tim.channel(chan, Timer.PWM, pin = self.pwm)
 		self.speed = 50
 
 	def forward(self):
@@ -73,7 +74,7 @@ def changeSpeed(s):
 	motorB.speed = s
 
 def updateSpeed():
-	s = (pot.value() / 4095) * 100
+	s = (pot.read() / 4095) * 100
 	changeSpeed(s)
 
 def rotateLeft():
@@ -86,11 +87,11 @@ def rotateRight():
 	motorA.forward()
 	motorB.backward()
 
-def checkPathBlocked():
+def checkBlocked():
 	if not(IR1.value() and IR2.value()):
-		pathBlocked = True
+		return True
 	else:
-		pathBlocked = False
+		return False
 
 while True:
 	if pathBlocked:
@@ -99,10 +100,6 @@ while True:
 	else:
 		moveForwards()
 		updateSpeed()
-	checkPathBlocked()
-
-
-
-
-
+	pyb.delay(50)
+	pathBlocked = checkBlocked()
 
