@@ -1,12 +1,4 @@
-This is a MicroPython board
+#team project
+We started running out of room on the pyboard, so we had to delete all of or comments. The code from before we did this is in the commented folder. 
 
-You can get started right away by writing your Python code in 'main.py'.
-
-For a serial prompt:
- - Windows: you need to go to 'Device manager', right click on the unknown device,
-   then update the driver software, using the 'pybcdc.inf' file found on this drive.
-   Then use a terminal program like Hyperterminal or putty.
- - Mac OS X: use the command: screen /dev/tty.usbmodem*
- - Linux: use the command: screen /dev/ttyACM0
-
-Please visit http://micropython.org/help/ for further help.
+We set out with the intention of using GitHub for source control, but due to time constraints we've ended up using it more as a place where we can all see the code that we produced.
